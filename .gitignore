@@ -1,0 +1,24 @@
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.ssh/
+.DS_Store
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+data/
+
+# Build outputs and local operational artifacts; keep source/configuration files.
+build/
+dist/
+*.egg-info/
+*.log
+deployment/**/wheels/
+deployment/**/qualification-summary.json

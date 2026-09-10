@@ -1,0 +1,64 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "crypto-agent"
+version = "0.1.0"
+description = "Real-time cryptocurrency market-data and shadow-trading research system"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "httpx>=0.27,<1",
+  "pyarrow>=18,<24",
+  "pydantic>=2.9,<3",
+  "pydantic-settings>=2.5,<3",
+  "python-socks[asyncio]>=2.7,<3",
+  "structlog>=24.4,<26",
+  "websockets>=15,<16",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.11,<2",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=1.4,<2",
+  "ruff>=0.7,<1",
+]
+
+[project.scripts]
+crypto-agent = "app.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+  "app",
+  "config",
+  "exchange",
+  "execution",
+  "features",
+  "market",
+  "recorder",
+  "replay",
+  "research",
+  "signals",
+  "strategies",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+asyncio_mode = "auto"
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_ignores = true
+exclude = [".venv"]
